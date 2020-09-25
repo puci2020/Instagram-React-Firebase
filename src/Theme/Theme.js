@@ -12,5 +12,8 @@ export const theme = {
             m: '1.4rem',
             l: '1.5rem'
         }
+    },
+    breakPoint: {
+        phone: '@media(max-width: 767px)'
     }
 };

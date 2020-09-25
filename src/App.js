@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 import Layout from "./Theme/Layout";
 import Post from "./Post";
@@ -21,6 +21,8 @@ const Content = styled.div`
   grid-template-columns: 2fr 1fr;
   grid-gap: 10px;
   
+
+  
   .left{
   width: 100%;
   height: fit-content;
@@ -33,6 +35,14 @@ const Content = styled.div`
   border: 1px solid lightgrey;
   grid-column: 2;
   
+  }
+  
+    ${({theme}) => theme.breakPoint.phone}{
+    grid-template-columns: 1fr;
+    padding: 60px 10%;
+    .right {
+    display: none;
+    };
   }
 `
 
@@ -55,6 +65,20 @@ const Img = styled.img`
 `;
 
 function App() {
+
+    const [posts, setPosts] = useState([
+        {
+            username: "puci",
+            caption: "elo elo",
+            imgURL: "https://images.unsplash.com/photo-1599687266725-0d4d52716b86?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+        },
+        {
+            username: "ziom",
+            caption: "fajnie",
+            imgURL: "https://images.unsplash.com/photo-1581498692102-eae0b781e672?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1490&q=80"
+        }
+    ]);
+
     return (
         <Layout>
             <Wrapper>
@@ -66,10 +90,9 @@ function App() {
                 </Header>
                 <Content>
                     <div className="left">
-                        <Post username="puci" caption="elo elo" imgURL={img1}/>
-                        <Post username="lala" caption="siemano" imgURL={img1}/>
-                        <Post username="paula" caption="elo elo" imgURL={img1}/>
-                        <Post username="ziom" caption="elo elo" imgURL={img1}/>
+                        {posts.map(({username, caption, imgURL}) => (
+                            <Post username={username} caption={caption} imgURL={imgURL}/>
+                            ))}
 
                     </div>
                     <div className="right">
