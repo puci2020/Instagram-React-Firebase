@@ -6,7 +6,7 @@ import Avatar from '@material-ui/core/Avatar'
 
 
 const PostWrapper = styled.div`
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
   height: fit-content;
   border: 1px solid ${({theme}) => theme.colors.gray};
@@ -42,17 +42,30 @@ const Img = styled.img`
   //height: auto;
 `;
 
-const Post = ({username, caption, imgURL}) => {
+const Post = ({id, data}) => {
     return (
         <PostWrapper>
             <PostHeader>
                 <Avatar className="post__avatar" alt="avatar" src={avatar}/>
-                <h3>{username}</h3>
+                <h3>{data.username}</h3>
             </PostHeader>
-            <Img src={imgURL} alt="Zdjęcie"/>
-            <h4 className="post__text"><strong>{username}</strong> {caption}</h4>
+            <Img src={data.imageURL} alt="Zdjęcie"/>
+            <h4 className="post__text"><strong>{data.username}</strong> {data.caption}</h4>
         </PostWrapper>
     );
 };
+
+// const Post = ({username, caption, imgURL}) => {
+//     return (
+//         <PostWrapper>
+//             <PostHeader>
+//                 <Avatar className="post__avatar" alt="avatar" src={avatar}/>
+//                 <h3>{username}</h3>
+//             </PostHeader>
+//             <Img src={imgURL} alt="Zdjęcie"/>
+//             <h4 className="post__text"><strong>{username}</strong> {caption}</h4>
+//         </PostWrapper>
+//     );
+// };
 
 export default Post;

@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import Layout from "./Theme/Layout";
 import Post from "./Post";
 import img1 from "./img/aboutBG.jpeg"
+import {db} from "./firebase";
 
 
 const Wrapper = styled.div`
@@ -14,7 +15,7 @@ const Wrapper = styled.div`
 const Content = styled.div`
     width: 100vw;
   //padding-top: 60px;
-  padding: 60px 20%;
+  padding: 60px 25%;
   //display: flex;
   //justify-content: space-around;
   display: grid;
@@ -53,10 +54,14 @@ const Header = styled.div`
   top: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 20%;
+  padding: 0 25%;
   align-items: center;
   border-bottom: 1px solid ${({theme}) => theme.colors.gray};
   background-color: white;
+  ${({theme}) => theme.breakPoint.phone}{
+    padding: 0 10%;
+   
+  }
 `;
 
 
@@ -66,18 +71,16 @@ const Img = styled.img`
 
 function App() {
 
-    const [posts, setPosts] = useState([
-        {
-            username: "puci",
-            caption: "elo elo",
-            imgURL: "https://images.unsplash.com/photo-1599687266725-0d4d52716b86?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-        },
-        {
-            username: "ziom",
-            caption: "fajnie",
-            imgURL: "https://images.unsplash.com/photo-1581498692102-eae0b781e672?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1490&q=80"
-        }
-    ]);
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        db.collection('posts').onSnapshot(snapshot => {
+            setPosts(snapshot.docs.map(doc => ({id: doc.id, data: doc.data()
+                // username: doc.username, caption: doc.caption, imgUrl: doc.imageUrl
+                })))
+        })
+    }, [posts]);
+    
 
     return (
         <Layout>
@@ -90,10 +93,13 @@ function App() {
                 </Header>
                 <Content>
                     <div className="left">
-                        {posts.map(({username, caption, imgURL}) => (
-                            <Post username={username} caption={caption} imgURL={imgURL}/>
+                        {posts.map(({id, data}) => (
+                            <Post key={id} data={data}/>
                             ))}
 
+                        {/*{posts.map(({username, caption, imgURL}) => (*/}
+                        {/*    <Post username={username} caption={caption} imgURL={imgURL}/>*/}
+                        {/*))}*/}
                     </div>
                     <div className="right">
                         asd
