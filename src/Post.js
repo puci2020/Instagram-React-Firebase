@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components'
-import img from './img/aboutBG.jpeg'
 import avatar from './img/2.jpg'
 import Avatar from '@material-ui/core/Avatar'
 

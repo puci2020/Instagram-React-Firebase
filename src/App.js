@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import Layout from "./Theme/Layout";
 import Post from "./Post";
-import img1 from "./img/aboutBG.jpeg"
 import {db} from "./firebase";
+import {Modal, Button, Input} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
 
 
 const Wrapper = styled.div`
@@ -13,11 +14,8 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
-    width: 100vw;
-  //padding-top: 60px;
+  width: 100vw;
   padding: 60px 25%;
-  //display: flex;
-  //justify-content: space-around;
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 10px;
@@ -25,27 +23,27 @@ const Content = styled.div`
 
   
   .left{
-  width: 100%;
-  height: fit-content;
-  grid-column: 1;
+      width: 100%;
+      height: fit-content;
+      grid-column: 1;
   }
   
   .right{
-  width: 100%;
-  height: fit-content;
-  border: 1px solid lightgrey;
-  grid-column: 2;
+      width: 100%;
+      height: fit-content;
+      border: 1px solid lightgrey;
+      grid-column: 2;
   
   }
   
     ${({theme}) => theme.breakPoint.phone}{
-    grid-template-columns: 1fr;
-    padding: 60px 10%;
+        grid-template-columns: 1fr;
+        padding: 60px 10%;
     .right {
-    display: none;
+      display: none;
     };
   }
-`
+`;
 
 const Header = styled.div`
   width: 100%;
@@ -69,33 +67,103 @@ const Img = styled.img`
   object-fit: contain;
 `;
 
-function App() {
+function getModalStyle() {
+    const top = 50
+    const left = 50
 
+    return {
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
+    };
+}
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        position: 'absolute',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        display: 'flex',
+        flexDirection: 'column',
+    },
+}));
+
+function App() {
+    const classes = useStyles();
+    const [modalStyle] = React.useState(getModalStyle);
     const [posts, setPosts] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
 
     useEffect(() => {
         db.collection('posts').onSnapshot(snapshot => {
-            setPosts(snapshot.docs.map(doc => ({id: doc.id, data: doc.data()
-                // username: doc.username, caption: doc.caption, imgUrl: doc.imageUrl
-                })))
+            setPosts(snapshot.docs.map(doc => ({
+                id: doc.id,
+                data: doc.data()
+            })))
         })
     }, [posts]);
-    
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
 
     return (
         <Layout>
             <Wrapper>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                >
+                    <div style={modalStyle} className={classes.paper}>
+                        <Img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+                             alt="Instagram Logo"
+                        />
+                        <Input
+                            placeholder="Username"
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <Input
+                            placeholder="Email"
+                            type="text"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            />
+                        <Input
+                            placeholder="Password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                </Modal>
                 <Header>
                     <Img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
                          alt="Instagram Logo"
                     />
-                    <div>logout</div>
+                    <Button onClick={handleOpen}>Sign Up</Button>
                 </Header>
                 <Content>
                     <div className="left">
                         {posts.map(({id, data}) => (
                             <Post key={id} data={data}/>
-                            ))}
+                        ))}
 
                         {/*{posts.map(({username, caption, imgURL}) => (*/}
                         {/*    <Post username={username} caption={caption} imgURL={imgURL}/>*/}
