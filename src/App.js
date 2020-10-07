@@ -67,6 +67,10 @@ const Img = styled.img`
   object-fit: contain;
 `;
 
+const LoginWrapper = styled.div`
+
+`
+
 function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -99,6 +103,7 @@ function App() {
     const [modalStyle] = React.useState(getModalStyle);
     const [posts, setPosts] = useState([]);
     const [open, setOpen] = useState(false);
+    const [openSignIn, setOpenSignIn] = useState(false);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -110,9 +115,9 @@ function App() {
                 console.log(authUser);
                 setUser(authUser);
 
-                if (authUser.displayName){
+                if (authUser.displayName) {
 
-                }else{
+                } else {
                     return authUser.updateProfile({
                         displayName: username
                     })
@@ -121,7 +126,7 @@ function App() {
                 setUser(null);
             }
         });
-//1:55
+
         return () => {
             unsubscribe();
         }
@@ -145,10 +150,24 @@ function App() {
         e.preventDefault();
 
         auth.createUserWithEmailAndPassword(email, password)
-            .catch((error) => alert(error.message))
+            .then((authUser) => {
+                return authUser.user.updateProfile({
+                    displayName: username
+                })
+            })
+            .catch((error) => alert(error.message));
 
+        setOpen(false);
     };
 
+    const signIn = (e) => {
+        e.preventDefault();
+
+        auth.signInWithEmailAndPassword(email, password)
+            .catch((error) => alert(error.message));
+
+        setOpenSignIn(false);
+    };
 
     return (
         <Layout>
@@ -191,18 +210,58 @@ function App() {
 
                     </form>
                 </Modal>
+                <Modal
+                    open={openSignIn}
+                    onClose={() => setOpenSignIn(false)}
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                >
+                    <form style={modalStyle} className={classes.paper}>
+
+                        <Img
+                            src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+                            alt="Instagram Logo"
+                        />
+                        <Input
+                            placeholder="Email"
+                            type="text"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className={classes.item}
+                        />
+                        <Input
+                            placeholder="Password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className={classes.item}
+                        />
+                        <Button type="submit" onClick={signIn}
+                                className={classes.item}>Sign In</Button>
+
+                    </form>
+                </Modal>
                 <Header>
+
                     <Img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
                          alt="Instagram Logo"
                     />
-                    <Button onClick={handleOpen}>Sign Up</Button>
+                    {user ? (
+                        <Button onClick={() => auth.signOut()}>Logout</Button>
+                    ) : (
+                        <LoginWrapper>
+                            <Button onClick={handleOpen}>Sign Up</Button>
+                            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+
+                        </LoginWrapper>
+                    )}
+
                 </Header>
                 <Content>
                     <div className="left">
                         {posts.map(({id, data}) => (
                             <Post key={id} data={data}/>
                         ))}
-
                         {/*{posts.map(({username, caption, imgURL}) => (*/}
                         {/*    <Post username={username} caption={caption} imgURL={imgURL}/>*/}
                         {/*))}*/}
