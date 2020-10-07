@@ -5,6 +5,7 @@ import Post from "./Post";
 import {db, auth} from "./firebase";
 import {Modal, Button, Input} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles';
+import ImageUpload from "./ImageUpload";
 
 
 const Wrapper = styled.div`
@@ -134,7 +135,7 @@ function App() {
     }, [user, username]);
 
     useEffect(() => {
-        db.collection('posts').onSnapshot(snapshot => {
+        db.collection('posts').orderBy('timestapm', 'desc').onSnapshot(snapshot => {
             setPosts(snapshot.docs.map(doc => ({
                 id: doc.id,
                 data: doc.data()
@@ -172,6 +173,7 @@ function App() {
     return (
         <Layout>
             <Wrapper>
+
                 <Modal
                     open={open}
                     onClose={() => setOpen(false)}
@@ -270,6 +272,12 @@ function App() {
                         asd
                     </div>
                 </Content>
+                {user?.displayName ? (
+                    <ImageUpload username={user.displayName}/>
+                ) : (
+                    <h3>Sorry you need to login to upload</h3>
+                )}
+
             </Wrapper>
         </Layout>
     );
