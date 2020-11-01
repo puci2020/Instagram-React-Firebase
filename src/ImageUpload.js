@@ -25,15 +25,18 @@ const UploadWrapper = styled.div`
   
   .file__input{
   flex: 1;
+
   }
   .file__button{
   flex: 0;
   margin-left: 10px;
+  
   }
   }
   
-  .controll{
+  .control{
   width: 100%;
+  font-size: ${({theme}) => theme.font.size.s};
   }
   
 
@@ -87,8 +90,8 @@ const ImageUpload = ({username}) => {
 
     return (
         <UploadWrapper>
-            <progress className="controll" value={progress} max="100"/>
-            <Input className="controll" value={caption} type="text" placeholder="Enter a caption..."
+            <progress className="control" value={progress} max="100"/>
+            <Input className="control" value={caption} type="text" placeholder="Enter a caption..."
                    onChange={e => setCaption(e.target.value)}/>
             <div className="file">
                 <Input className="control file__input"  type="file" onChange={handleChange}/>

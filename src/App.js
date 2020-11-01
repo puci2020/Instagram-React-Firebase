@@ -6,7 +6,7 @@ import {db, auth} from "./firebase";
 import {Modal, Button, Input} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles';
 import ImageUpload from "./ImageUpload";
-
+import InstagramEmbed from 'react-instagram-embed';
 
 const Wrapper = styled.div`
   background-color: ${({theme}) => theme.colors.background};
@@ -16,9 +16,9 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
   width: 100vw;
-  padding: 60px 25%;
+  padding: 60px 20%;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1.25fr 1fr;
   grid-gap: 10px;
   
 
@@ -31,7 +31,7 @@ const Content = styled.div`
   
   .right{
       width: 100%;
-      height: fit-content;
+      height: auto;
       border: 1px solid lightgrey;
       grid-column: 2;
   
@@ -53,10 +53,14 @@ const Header = styled.div`
   top: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 25%;
+  padding: 0 20%;
   align-items: center;
   border-bottom: 1px solid ${({theme}) => theme.colors.gray};
   background-color: white;
+  
+  .btn{
+    font-size: ${({theme}) => theme.font.size.xs};
+  }
   ${({theme}) => theme.breakPoint.phone}{
     padding: 0 10%;
    
@@ -96,6 +100,7 @@ const useStyles = makeStyles((theme) => ({
     },
     item: {
         margin: 5,
+        fontSize: 12
     }
 }));
 
@@ -249,11 +254,11 @@ function App() {
                          alt="Instagram Logo"
                     />
                     {user ? (
-                        <Button onClick={() => auth.signOut()}>Logout</Button>
+                        <Button className="btn" onClick={() => auth.signOut()}>Logout</Button>
                     ) : (
                         <LoginWrapper>
-                            <Button onClick={handleOpen}>Sign Up</Button>
-                            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+                            <Button className="btn" onClick={handleOpen}>Sign Up</Button>
+                            <Button className="btn" onClick={() => setOpenSignIn(true)}>Sign In</Button>
 
                         </LoginWrapper>
                     )}
@@ -262,14 +267,23 @@ function App() {
                 <Content>
                     <div className="left">
                         {posts.map(({id, data}) => (
-                            <Post key={id} data={data}/>
+                            <Post key={id} postId={id} user={user} data={data}/>
                         ))}
-                        {/*{posts.map(({username, caption, imgURL}) => (*/}
-                        {/*    <Post username={username} caption={caption} imgURL={imgURL}/>*/}
-                        {/*))}*/}
+
                     </div>
                     <div className="right">
-                        asd
+                        <InstagramEmbed
+                            url='https://instagr.am/p/Zw9o4/'
+                            maxWidth={320}
+                            hideCaption={false}
+                            containerTagName='div'
+                            protocol=''
+                            injectScript
+                            onLoading={() => {}}
+                            onSuccess={() => {}}
+                            onAfterRender={() => {}}
+                            onFailure={() => {}}
+                        />
                     </div>
                 </Content>
                 {user?.displayName ? (
@@ -277,7 +291,6 @@ function App() {
                 ) : (
                     <h3>Sorry you need to login to upload</h3>
                 )}
-
             </Wrapper>
         </Layout>
     );
