@@ -272,18 +272,18 @@ function App() {
 
                     </div>
                     <div className="right">
-                        <InstagramEmbed
-                            url='https://instagr.am/p/Zw9o4/'
-                            maxWidth={320}
-                            hideCaption={false}
-                            containerTagName='div'
-                            protocol=''
-                            injectScript
-                            onLoading={() => {}}
-                            onSuccess={() => {}}
-                            onAfterRender={() => {}}
-                            onFailure={() => {}}
-                        />
+                        {/*<InstagramEmbed*/}
+                        {/*    url='https://instagr.am/p/Zw9o4/'*/}
+                        {/*    maxWidth={320}*/}
+                        {/*    hideCaption={false}*/}
+                        {/*    containerTagName='div'*/}
+                        {/*    protocol=''*/}
+                        {/*    injectScript*/}
+                        {/*    onLoading={() => {}}*/}
+                        {/*    onSuccess={() => {}}*/}
+                        {/*    onAfterRender={() => {}}*/}
+                        {/*    onFailure={() => {}}*/}
+                        {/*/>*/}
                     </div>
                 </Content>
                 {user?.displayName ? (

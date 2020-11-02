@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components'
 import avatar from './img/2.jpg'
 import Avatar from '@material-ui/core/Avatar'
+import {Button} from "@material-ui/core";
 import {db} from "./firebase";
 import firebase from 'firebase'
 
@@ -24,16 +25,20 @@ const PostWrapper = styled.div`
     form{
     display: flex;
     width: 100%;
+    height: 40px;
     font-size: ${({theme}) => theme.font.size.m};
+    border-top: 1px solid ${({theme}) => theme.colors.gray};
     
       .post__input{
-        border: 1px solid gray;
+       border: none;
         outline: none;
-        flex: 2;
+        width: 90%;
+        padding-left: 10px;
       }
       
       .post__button{
-        flex: 1
+        width: 10%;
+        font-size: ${({theme}) => theme.font.size.s};
       }
     }
   
@@ -101,24 +106,24 @@ const Post = ({postId, user, data}) => {
     return (
         <PostWrapper>
             <PostHeader>
-                <Avatar className="post__avatar" alt="avatar" src={avatar}/>
+                <Avatar className="post__avatar" alt="avatar" />
                 <h3>{data.username}</h3>
             </PostHeader>
             <Img src={data.imageURL} alt="Zdjęcie"/>
             <h4 className="post__text"><strong>{data.username}</strong> {data.caption}</h4>
             {comments.map(({id, com}) => (
-                <h4 className="post__text"><strong>{com.username}</strong> {com.text}</h4>
+                <h4 key={id} className="post__text"><strong>{com.username}</strong> {com.text}</h4>
             ))}
             <form>
                 <input type="text" className="post__input" placeholder="Add a comment..." value={comment}
                        onChange={(e) => setComment(e.target.value)}/>
-                <button type="submit"
+                <Button type="submit"
                         className="post__button"
                         disabled={!comment}
                         onClick={postComment}
                 >
                     Post
-                </button>
+                </Button>
             </form>
         </PostWrapper>
     );
