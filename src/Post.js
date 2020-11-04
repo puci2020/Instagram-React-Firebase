@@ -126,7 +126,7 @@ const Post = ({postId, user, data}) => {
             <form>
                 <input type="text" className="post__input" placeholder="Add a comment..." value={comment}
                        onChange={(e) => setComment(e.target.value)}/>
-                <StyledTooltip open={comment} title="You have to Sign In to comment">
+                <StyledTooltip open={comment && !user} title="You have to Sign In to comment">
                        <Button type="submit"
                         className="post__button"
                         disabled={!comment || !user}
