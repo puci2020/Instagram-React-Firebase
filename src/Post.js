@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components'
-import avatar from './img/2.jpg'
 import Avatar from '@material-ui/core/Avatar'
 import {Button} from "@material-ui/core";
+import Tooltip from '@material-ui/core/Tooltip';
 import {db} from "./firebase";
 import firebase from 'firebase'
+import withStyles from "@material-ui/core/styles/withStyles";
 
 
 const PostWrapper = styled.div`
@@ -40,6 +41,7 @@ const PostWrapper = styled.div`
         width: 10%;
         font-size: ${({theme}) => theme.font.size.s};
       }
+      
     }
   
 `;
@@ -64,7 +66,14 @@ const Img = styled.img`
   //height: auto;
 `;
 
+const StyledTooltip = withStyles({
+   tooltip: {
+       fontSize: 12
+   }
+})(Tooltip);
+
 const Post = ({postId, user, data}) => {
+
 
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState('');
@@ -117,13 +126,15 @@ const Post = ({postId, user, data}) => {
             <form>
                 <input type="text" className="post__input" placeholder="Add a comment..." value={comment}
                        onChange={(e) => setComment(e.target.value)}/>
-                <Button type="submit"
+                <StyledTooltip open={comment} title="You have to Sign In to comment">
+                       <Button type="submit"
                         className="post__button"
-                        disabled={!comment}
+                        disabled={!comment || !user}
                         onClick={postComment}
                 >
                     Post
                 </Button>
+                </StyledTooltip>
             </form>
         </PostWrapper>
     );

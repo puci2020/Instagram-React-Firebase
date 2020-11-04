@@ -57,6 +57,7 @@ const Header = styled.div`
   align-items: center;
   border-bottom: 1px solid ${({theme}) => theme.colors.gray};
   background-color: white;
+  z-index: 9;
   
   .btn{
     font-size: ${({theme}) => theme.font.size.xs};
