@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Instagram-React-Firebase/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/Instagram-React-Firebase/static/js/main.cd787381.chunk.js",
+    "main.js.map": "/Instagram-React-Firebase/static/js/main.cd787381.chunk.js.map",
+    "runtime-main.js": "/Instagram-React-Firebase/static/js/runtime-main.a16fc931.js",
+    "runtime-main.js.map": "/Instagram-React-Firebase/static/js/runtime-main.a16fc931.js.map",
+    "static/js/2.91e8303a.chunk.js": "/Instagram-React-Firebase/static/js/2.91e8303a.chunk.js",
+    "static/js/2.91e8303a.chunk.js.map": "/Instagram-React-Firebase/static/js/2.91e8303a.chunk.js.map",
+    "index.html": "/Instagram-React-Firebase/index.html",
+    "precache-manifest.c916ea1dc143a99c23c9f9377bb17930.js": "/Instagram-React-Firebase/precache-manifest.c916ea1dc143a99c23c9f9377bb17930.js",
+    "service-worker.js": "/Instagram-React-Firebase/service-worker.js",
+    "static/css/main.5ecd60fb.chunk.css.map": "/Instagram-React-Firebase/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.91e8303a.chunk.js.LICENSE.txt": "/Instagram-React-Firebase/static/js/2.91e8303a.chunk.js.LICENSE.txt",
+    "static/media/2.jpg": "/Instagram-React-Firebase/static/media/2.17d7183a.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a16fc931.js",
+    "static/js/2.91e8303a.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.cd787381.chunk.js"
+  ]
+}
