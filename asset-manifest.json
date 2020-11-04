@@ -1,23 +1,22 @@
 {
   "files": {
     "main.css": "/Instagram-React-Firebase/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/Instagram-React-Firebase/static/js/main.cd787381.chunk.js",
-    "main.js.map": "/Instagram-React-Firebase/static/js/main.cd787381.chunk.js.map",
+    "main.js": "/Instagram-React-Firebase/static/js/main.6cb8ff75.chunk.js",
+    "main.js.map": "/Instagram-React-Firebase/static/js/main.6cb8ff75.chunk.js.map",
     "runtime-main.js": "/Instagram-React-Firebase/static/js/runtime-main.a16fc931.js",
     "runtime-main.js.map": "/Instagram-React-Firebase/static/js/runtime-main.a16fc931.js.map",
-    "static/js/2.91e8303a.chunk.js": "/Instagram-React-Firebase/static/js/2.91e8303a.chunk.js",
-    "static/js/2.91e8303a.chunk.js.map": "/Instagram-React-Firebase/static/js/2.91e8303a.chunk.js.map",
+    "static/js/2.e2b105b7.chunk.js": "/Instagram-React-Firebase/static/js/2.e2b105b7.chunk.js",
+    "static/js/2.e2b105b7.chunk.js.map": "/Instagram-React-Firebase/static/js/2.e2b105b7.chunk.js.map",
     "index.html": "/Instagram-React-Firebase/index.html",
-    "precache-manifest.c916ea1dc143a99c23c9f9377bb17930.js": "/Instagram-React-Firebase/precache-manifest.c916ea1dc143a99c23c9f9377bb17930.js",
+    "precache-manifest.dfce108de00064a8dab76406ab882fe1.js": "/Instagram-React-Firebase/precache-manifest.dfce108de00064a8dab76406ab882fe1.js",
     "service-worker.js": "/Instagram-React-Firebase/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/Instagram-React-Firebase/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.91e8303a.chunk.js.LICENSE.txt": "/Instagram-React-Firebase/static/js/2.91e8303a.chunk.js.LICENSE.txt",
-    "static/media/2.jpg": "/Instagram-React-Firebase/static/media/2.17d7183a.jpg"
+    "static/js/2.e2b105b7.chunk.js.LICENSE.txt": "/Instagram-React-Firebase/static/js/2.e2b105b7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a16fc931.js",
-    "static/js/2.91e8303a.chunk.js",
+    "static/js/2.e2b105b7.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.cd787381.chunk.js"
+    "static/js/main.6cb8ff75.chunk.js"
   ]
 }
